@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -19,10 +20,35 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def flavor = variant.name
+                    def versionName = variant.versionName
+                    outputFileName = "Claranet-template_${flavor}_${versionName}.apk"
+                }
+            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "claranettemplate"
+    productFlavors {
+        prod {
+            dimension "claranettemplate"
+            resValue 'string', 'app_name', 'claranet_template'
+            resValue 'string', 'backend_base_url', 'https://prodbe.com'
+        }
+        dev {
+            dimension "claranettemplate"
+            resValue 'string', 'app_name', 'claranet_template_dev'
+            resValue 'string', 'backend_base_url', 'https://devbe.com'
         }
     }
     compileOptions {
@@ -31,6 +57,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    lint {
+        abortOnError false
     }
     buildFeatures {
         compose true
