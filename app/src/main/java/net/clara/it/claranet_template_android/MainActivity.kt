@@ -3,7 +3,9 @@ package net.clara.it.claranet_template_android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
@@ -50,8 +52,11 @@ class MainActivity : ComponentActivity() {
                    // var pagerState = rememberPagerState(tabs.size)
                     Scaffold(
                         bottomBar = { navTab(tabs,navController) }
-                    ) {
-                       NavGraph(navController)
+                    ) { innerPadding ->
+                        Box( modifier = Modifier.padding(innerPadding)) {
+                            NavGraph(navController)
+                        }
+
                     }
                 }
             }
