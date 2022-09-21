@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -19,12 +18,12 @@ import net.clara.it.claranet_template_android.composable.news.newsComposable
 fun homeScreen(
     navController: NavController,
 ){
-    val lifecycleOwner = LocalLifecycleOwner.current
     val vm = viewModel<HomeScreenViewModel>()
+    val news by vm.getNews().observeAsState()
+
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
-        val news by vm.getNews().observeAsState()
         news?.forEach{ news ->
             newsComposable(news)
         }
