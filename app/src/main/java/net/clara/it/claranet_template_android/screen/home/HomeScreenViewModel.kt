@@ -1,18 +1,16 @@
 package net.clara.it.claranet_template_android.screen.home
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.*
 import net.clara.it.claranet_template_android.model.News
 
 class HomeScreenViewModel() : ViewModel() {
-    private val news = MutableLiveData<List<News>>()
 
-    fun getNews() = news as LiveData<List<News>>
+    private val _news = MutableLiveData<List<News>>()
+    private val newsImpl = mutableStateListOf<News>()
 
     init {
-
 
         addNews(News(
             "https://www.sportevai.it/uploads/2022/08/Bremer_MG0_3160.jpg",
@@ -38,7 +36,13 @@ class HomeScreenViewModel() : ViewModel() {
 
     }
 
+    fun getNews() = _news as LiveData<List<News>>
+
     fun addNews(news: News){
-        this.news.value = this.news.value?.plus(news) ?: listOf(news)
+        Log.i("HomeScreenViewModel","add element")
+        newsImpl.add(news)
+        _news.postValue(newsImpl)
+        Log.i("HomeScreenViewModel","Now there are ${_news.value?.size} elements")
+
     }
 }
