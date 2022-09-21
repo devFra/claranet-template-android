@@ -1,32 +1,40 @@
 package net.clara.it.claranet_template_android.screen.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import net.clara.it.claranet_template_android.screen.Screen
+import net.clara.it.claranet_template_android.composable.news.newsComposable
+
+
 
 @Composable
-fun homeScreen(navController: NavController){
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ){
-        Text(text = "Home")
-    }
-}
+fun homeScreen(
+    navController: NavController,
+){
+    val vm = viewModel<HomeScreenViewModel>()
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
 
+        vm.getNews().value?.forEach { news ->
+            newsComposable(news)
+        }
+
+    }
+
+
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun homeScreenPreview(){
     homeScreen(navController = rememberNavController())
 }
+

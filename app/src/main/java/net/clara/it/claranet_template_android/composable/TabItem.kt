@@ -1,4 +1,4 @@
-package net.clara.it.claranet_template_android.composable.tabNav
+package net.clara.it.claranet_template_android.composable
 
 import androidx.compose.runtime.Composable
 import net.clara.it.claranet_template_android.R

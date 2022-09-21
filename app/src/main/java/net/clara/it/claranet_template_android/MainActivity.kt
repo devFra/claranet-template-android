@@ -1,21 +1,19 @@
 package net.clara.it.claranet_template_android
 
 import android.os.Bundle
-import android.view.Surface
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import net.clara.it.claranet_template_android.composable.tabNav.TabItem
-import net.clara.it.claranet_template_android.composable.tabNav.navTab
+import net.clara.it.claranet_template_android.composable.TabItem
+import net.clara.it.claranet_template_android.composable.toRemove.navTab
 import net.clara.it.claranet_template_android.ui.theme.ClaranettemplateandroidTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 class MainActivity : ComponentActivity() {
 
@@ -32,7 +30,10 @@ class MainActivity : ComponentActivity() {
 
         startKoin {
             androidContext(this@MainActivity)
-            modules(listOf(networkModule))
+            modules(listOf(
+                networkModule,
+                viewModelModule
+            ))
         }
 
         setContent {
@@ -55,6 +56,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopKoin()
     }
 }
 
