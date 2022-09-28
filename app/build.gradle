@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "net.clara.it.claranet_template_android"
-        minSdk 30
+        minSdk 29
         targetSdk 32
         versionCode 1
         versionName "1.0"

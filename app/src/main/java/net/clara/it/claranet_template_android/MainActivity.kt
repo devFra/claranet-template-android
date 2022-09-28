@@ -88,7 +88,6 @@ class MainActivity : ComponentActivity() {
                         Box( modifier = Modifier.padding(innerPadding)) {
                             NavGraph(navController)
                         }
-
                     }
                 }
             }
