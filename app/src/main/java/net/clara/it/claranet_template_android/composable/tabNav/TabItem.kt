@@ -1,4 +1,4 @@
-package net.clara.it.claranet_template_android.composable
+package net.clara.it.claranet_template_android.composable.tabNav
 
 import androidx.compose.runtime.Composable
 import net.clara.it.claranet_template_android.R
@@ -11,7 +11,7 @@ sealed class TabItem(
     var title: String,
     var route: String
 ){
-    object Home: TabItem(R.drawable.ic_home_icon, "Home", Screen.HomeScreen.route)
+    object Home: TabItem(R.drawable.ic_home_icon, "Home", Screen.homeScreen.route)
     object Streaming: TabItem(R.drawable.ic_straming_ico, "Streaming", Screen.streamingScreen.route )
     object Results: TabItem(R.drawable.ic_results_ico, "Results", Screen.resultsScreen.route )
     object Other: TabItem(R.drawable.ic_other_ico, "Other", Screen.othersScreen.route)
